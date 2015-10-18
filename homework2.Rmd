@@ -109,3 +109,73 @@ The relationship between volume and diameter seems to be strong, and a linear fi
 ##### 5.10 (c)
 
 As the correlation between volume and diameter seems much higher than the correlation between volume and height, diameter seems like a much better predictive variable. 
+
+***
+
+
+
+## Part 2
+### Lab
+
+
+
+
+#### Question 1
+
+```{r}
+download.file("http://www.openintro.org/stat/data/ames.RData", destfile = "ames.RData")
+load("ames.RDATA")
+price <- ames$SalePrice
+samp1 <- sample(price, 60)
+pointEst <- mean(samp1)
+pointEst
+```
+
+#### Question 2
+
+```{r}
+samp_mean <- rep(NA, 50)
+samp_sd <- rep(NA, 50)
+for(i in 1:50){
+samp <- sample(price, 60)
+samp_mean[i] <- mean(samp) 
+samp_sd[i] <- sd(samp)
+}
+hist(samp_mean)
+```
+
+#### Question 3
+
+```{r}
+lower_vector <- samp_mean - 1.96 * samp_sd / sqrt(60)
+upper_vector <- samp_mean + 1.96 * samp_sd / sqrt(60)
+c(lower_vector[1], upper_vector[1])
+plot_ci(lower_vector, upper_vector, mean(price))
+```
+
+90% of the confidence intervals incude the true population mean, even though the confidence interval we used was 95%. This could be due to the small sampling size used, which effects our standard error, and perhaps does not allow us to account for the variablitiy between samples very well. Its possible that this effect could also be reduced by increasing the number of simulations performed. 
+
+#### Question 4
+
+
+```{r}
+lower_vector <- samp_mean - 2.58 * samp_sd / sqrt(60)
+upper_vector <- samp_mean + 2.58 * samp_sd / sqrt(60)
+c(lower_vector, upper_vector)
+plot_ci(lower_vector, upper_vector, mean(price))
+```
+
+Using a confidence interval of 99%, we are taking into consideration the variablitiy that we could not account for in our lower vector and upper vector 
+
+
+#### Question 5
+
+```{r}
+lower_vector <- samp_mean - 2.58 * samp_sd / sqrt(60)
+upper_vector <- samp_mean + 2.58 * samp_sd / sqrt(60)
+c(lower_vector[1], upper_vector[1])
+plot_ci(lower_vector, upper_vector, mean(price))
+```
+
+This time, there is only 2% of the intervals that are not including the population mean, which is much closer to the 99% confidence interval that I selected. 
+
