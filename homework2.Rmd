@@ -1,0 +1,111 @@
+---
+title: "Homework 2"
+author: "Jaime Tanner"
+date: "October 17, 2015"
+output: html_document
+---
+
+***
+
+
+
+## Part 1 
+### Chapter Questions 
+
+
+
+
+#### 2.2 
+
+##### 2.2 (a)
+
+15/17 of patients in the control group died and 15/23 patients in the treatment group died. 
+
+##### 2.2 (b)
+(i) 
+H~0~: **Null Hypothesis.** The variables *transplant* and *survival* are independent. They have no relationship, and the observed difference between the proportion of deaths in the treatment group and the proportion of deaths in the control group was due to chance.  
+H~A~: **Alternative Hypothesis.** The variables *transplant* and *survival* are not independent. The difference between the proportion of deaths in the treatment group and the proportion of deaths in teh control group was not due to chance. 
+
+(ii)
+28; 75; 69; 34; 0; (15/23) - (15/17),  or about -0.23
+
+(iii)
+It looks like 0% of the simulations show a difference in proportions of -0.23 (2% have an approximate difference -0.23), which indicates that it is unlikely that the difference observed is due to chance. Knowing that the null hyopothesis can be rejected, it is possible that the transplant program is effective in reducing the number of deaths. 
+
+
+#### 3.28
+
+Assuming that each proportion seperately follows a normal model, and the two samples are independent of each other, we can calculate the standard error in the difference in sample proportions by calculating $$sqrt(((p~1~(1-p~1~))/n~1~) + ((p~2~(1-p~2~))/n~2~))$$ Using this formula, we can calculate a standard error for the difference between proportions (or the difference of 0.088 - 0.08)
+
+```{r}
+answer <- sqrt(((0.088 * (1 - 0.088))/4691) + ((0.08 * (1 - 0.08))/11545))
+answer
+```
+
+which is about 0.0048. 
+
+Next we can compute a 95% confidence interval by using Z* = 1.96, which gives us an estimate of  (-0.001, 0.017).
+
+
+#### 3.30
+
+##### 3.30 (a)
+
+H~0~: **Null Hypothesis.** The proportion of people who get insufficient sleep in california and the proportion of people who get insufficient sleep in Oregon are the same, so that p~1~ - p~2~ = 0.   
+H~A~: **Alternative Hypothesis.** The difference in proportions of people who get insufficient sleep in both states are not the same, and sleep deprivation rates are different in each state, so that p~1~ - p~2~ > 0
+
+
+First, we must check whether the conditions are met to use the normal model and make an inference from the result. First we ask whether the observations are independant. Although we have no way to determine this with the information given, we can assume that each person is representative of each respective population and that the amount of sleep each person gets is independant between observations. Because our null hyopthesis suggests that the proportions are equal, we can use the pooled proportion estimate to verify the success-failure condition, and also estimate the standard error. Phat * n for each city is larger than 10, so the success-failure condition is met. 
+```{r}
+phat <- ((0.08 * 11545) + (0.088 * 4691)) / (11545 + 4691)
+phat
+se <- sqrt(((phat * (1 - phat))/11545) + ((phat * (1 - phat))/4691))
+se
+```
+
+phat is about 0.082, which makes the standard error around 0.0048. Computing the test statistic using (point estimate - null value)/SE gives us an estimate of 1.67. Looking up Z = 1.67 in the normal probability table gives us 0.9525. However this is just the lower tail, and the upper tail represents the p value 1-0.9525= 0.0475. Therefore, we can reject the null hypothesis. 
+
+##### 3.30 (b)
+
+Yes, as we did make an assumption that the the observations were independant, it is posisble that the results are incorrect. If this is the case, than it is possible that we should not have rejected the null hypothesis, and we have made a Type 1 error. 
+
+#### 4.16
+
+##### 4.16 (a)
+
+The difference in the two sample means is the parameter of interest, and the point estimate is 2.4. 
+
+##### 4.16 (b)
+
+In this study, we can assume that the observations are independant of each other. Additionally, the distributions shown don't show any clear deviations from nomality. We can also assume that the people in each group were independant of each other.
+
+##### 4.16 (c)
+
+First we find the standard error useing sqrt((s~1~^2^/n~1~) + (s~2~^2^/n~2~))
+
+```{r}
+SE <- sqrt((15.1^2/505) + (15.1^2/667))
+SE
+```
+
+so SE is about 0.89. DF = 504. t = 1.96. So, using confidence interval formula, we get (0.66, 4.14). 95% confident that college students with a college degree work 0.66 - 4.14 more hours a week.
+
+##### 4.16 (c)
+
+It is possible that individuals with high level formal education recieve more management/higher tier positions, which require more time on the job. 
+
+
+#### 5.10
+
+##### 5.10 (a)
+
+Volume and height of trees show a weak relationship, but trying a linear fit may be reasonable. However, while the relationship looks positive, the correlation may be very low.  
+
+
+##### 5.10 (b)
+
+The relationship between volume and diameter seems to be strong, and a linear fit would be reasonable. It appears they would have a high positive correlation. 
+
+##### 5.10 (c)
+
+As the correlation between volume and diameter seems much higher than the correlation between volume and height, diameter seems like a much better predictive variable. 
