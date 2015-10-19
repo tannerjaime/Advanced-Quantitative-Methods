@@ -88,9 +88,9 @@ SE <- sqrt((15.1^2/505) + (15.1^2/667))
 SE
 ```
 
-so SE is about 0.89. DF = 504. t = 1.96. So, using confidence interval formula, we get (0.66, 4.14). 95% confident that college students with a college degree work 0.66 - 4.14 more hours a week.
+so SE is about 0.89. DF = 504. t = 2.68. So, using confidence interval from the T test, we can reject the null hypothesis
 
-##### 4.16 (c)
+##### 4.16 (d)
 
 It is possible that individuals with high level formal education recieve more management/higher tier positions, which require more time on the job. 
 
